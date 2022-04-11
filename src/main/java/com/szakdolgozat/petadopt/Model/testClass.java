@@ -11,6 +11,9 @@ public class testClass{
     private String username;
     private String password;
 
+        public testClass() {
+
+        }
 
         public testClass(Long id, String username, String password) {
             this.id = id;
@@ -19,7 +22,9 @@ public class testClass{
         }
 
 
-        public Long getId() {
+
+
+    public Long getId() {
             return id;
         }
 
