@@ -9,7 +9,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-@Transactional
 public interface CountryRepository extends JpaRepository<Country, Long> {
+
+    Boolean existsCountryById(Long id);
 
 }

@@ -10,7 +10,7 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -25,18 +25,20 @@ public class City {
     @OneToMany(mappedBy = "city")
     private Set<Pet> pets = new LinkedHashSet<>();
 
-    public City(Integer id, String name, Country country) {
-        this.id = id;
+    public City() {
+    }
+
+    public City(String name, Country country) {
         this.name = name;
         this.country = country;
     }
 
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
