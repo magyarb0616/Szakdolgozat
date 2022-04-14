@@ -5,7 +5,7 @@ public class CountryDTO {
     //@NotEmpty(message = "Name cannot be empty!")
    // @NotNull(message = "Name cannot be null!")
     private String name;
-    private Integer id;
+    private Long id;
 
 
 
@@ -18,11 +18,11 @@ public class CountryDTO {
         this.name = name;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
