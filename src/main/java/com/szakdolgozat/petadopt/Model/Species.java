@@ -18,6 +18,13 @@ public class Species {
     @OneToMany(mappedBy = "species")
     private Set<Breed> breeds = new LinkedHashSet<>();
 
+    public Species() {
+    }
+
+    public Species(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

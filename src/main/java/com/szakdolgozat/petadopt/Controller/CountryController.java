@@ -22,12 +22,11 @@ public class CountryController {
     private CountryService countryService;
     @Autowired
     private CountryRepository countryRepository;
-
     @Autowired
     private CityRepository cityRepository;
 
     @GetMapping
-    public Map<String, String> getCountrybyID(IdDTO data){
+    public Map<String, String> getCountryByID(IdDTO data){
         Optional<Country> country = countryRepository.findById(data.getId());
         if(country.isPresent()){
             Map<String, String> map = new HashMap<>();
@@ -42,13 +41,13 @@ public class CountryController {
     @GetMapping (path= "/list")
     public List<Map<String, String>> getAllCountry() {
 
-        List<Country> countrys = countryRepository.findAll();
-        List<Map<String, String>> out = new ArrayList<Map<String, String>>();
+        List<Country> countries = countryRepository.findAll();
+        List<Map<String, String>> out = new ArrayList<>();
 
-        for(Country country : countrys){
+        for(Country country : countries){
             String id = country.getId().toString();
             String name = country.getName();
-            Map<String, String> map = new HashMap<>();
+            Map<String, String> map = new LinkedHashMap<>();
             map.put("id", id);
             map.put("name", name);
             out.add(map);
@@ -60,13 +59,13 @@ public class CountryController {
     public List<Map<String, String>> getCountryCities(IdDTO data){
         if (countryRepository.existsCountryById(data.getId())){
             List<City> cities = cityRepository.findAllByCountry_Id(data.getId());
-            List<Map<String, String>> out = new ArrayList<Map<String, String>>();
+            List<Map<String, String>> out = new ArrayList<>();
 
             for(City city : cities){
                 String id = city.getId().toString();
                 String name = city.getName();
                 String countryid = city.getCountry().getId().toString();
-                Map<String, String> map = new HashMap<>();
+                Map<String, String> map = new LinkedHashMap<>();
                 map.put("id", id);
                 map.put("name", name);
                 map.put("countryid",countryid);
@@ -77,20 +76,20 @@ public class CountryController {
     }
 
     @PostMapping
-    public ResponseEntity<?> saveCountry(CountryDTO data){
-        countryService.saveCountryValidate(data);
+    public ResponseEntity<?> createCountry(CountryDTO data){
+        countryService.countryCreateValidate(data);
         return new ResponseEntity<>(null,HttpStatus.OK);
     }
 
     @PutMapping
     public ResponseEntity<?> updateCountry(CountryDTO data){
-        countryService.updateCountryValidate(data);
+        countryService.countryUpdateValidate(data);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @DeleteMapping
     public ResponseEntity<?> deleteCountry(IdDTO data){
-        countryService.deleteCountryValidate(data);
+        countryService.countryDeleteValidate(data);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
