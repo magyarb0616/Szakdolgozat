@@ -29,7 +29,7 @@ public class CityService {
     @Autowired
     private PetRepository petRepository;
 
-    public void cityCreateValidate(CityDTO data){
+    public void CitySaveValidate(CityDTO data){
         if (cityRepository.existsCityByName(data.getName())){
             throw new AlreadyExistsException("City","name",data.getName());
         } else if (data.getName().isEmpty()) {
@@ -42,7 +42,7 @@ public class CityService {
         }
     }
 
-    public void cityDeleteValidate(IdDTO data){
+    public void CityDeleteValidate(IdDTO data){
         if (cityRepository.existsById(data.getId()))
         {
             if(userRepository.existsUserByCity_Id(data.getId()) || petRepository.existsPetByCity_Id(data.getId()))
@@ -54,7 +54,7 @@ public class CityService {
         }
     }
 
-    public void cityUpdateValidate(CityDTO data){
+    public void CityUpdateValidate(CityDTO data){
         City existingCity = cityRepository.findById(data.getId()).orElseThrow(
                 () -> new ResourceNotFoundException("City","id",data.getId()));
         if (data.getName().isEmpty())

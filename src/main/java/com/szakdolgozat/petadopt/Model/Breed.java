@@ -22,15 +22,6 @@ public class Breed {
     @OneToMany(mappedBy = "breed")
     private Set<Pet> pets = new LinkedHashSet<>();
 
-
-    public Breed() {
-    }
-
-    public Breed(String name, Species species) {
-        this.name = name;
-        this.species = species;
-    }
-
     public Long getId() {
         return id;
     }

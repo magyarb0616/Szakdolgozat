@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PetRepository extends JpaRepository<Pet, Long> {
     Boolean existsPetByCity_Id(Long id);
-    Boolean existsPetByBreedId(Long id);
 
 
 }

@@ -22,7 +22,7 @@ public class CountryService {
     @Autowired
     private CityRepository cityRepository;
 
-    public void countryCreateValidate(CountryDTO data){
+    public void saveCountryValidate(CountryDTO data){
         if (!data.getName().isEmpty()){
             countryRepository.save(new Country(data.getName()));
         }else{
@@ -30,20 +30,19 @@ public class CountryService {
         }
     }
 
-    public void countryDeleteValidate(IdDTO data){
+    public void deleteCountryValidate(IdDTO data){
         Country existingCountry = countryRepository.findById(data.getId()).orElseThrow(
                 () -> new ResourceNotFoundException("Country","id",data.getId() ));
         if(cityRepository.existsCityByCountry_Id(data.getId())){
-            throw new DependenceException("At least one City depends on this Country");
-        } else { countryRepository.deleteById(data.getId()); }
+            throw new DependenceException();
+        }
+        countryRepository.deleteById(data.getId());
     }
 
-    public void countryUpdateValidate(CountryDTO data){
+    public void updateCountryValidate(CountryDTO data){
         Country existingCountry = countryRepository.findById(data.getId()).orElseThrow(
                 () -> new ResourceNotFoundException("Country","id",data.getId() ));
-        if (!data.getName().isEmpty()){
-            existingCountry.setName(data.getName());
-            countryRepository.save(existingCountry);
-        } else { throw new NullException("Country","name"); }
+        existingCountry.setName(data.getName());
+        countryRepository.save(existingCountry);
     }
 }

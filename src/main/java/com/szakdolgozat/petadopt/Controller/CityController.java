@@ -12,7 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping(path = "api/city")
@@ -33,7 +36,7 @@ public class CityController {
             String id = city.getId().toString();
             String name = city.getName();
             String countryId = city.getCountry().getId().toString();
-            Map<String, String> map = new LinkedHashMap<>();
+            Map<String, String> map = new HashMap<>();
             map.put("id", id);
             map.put("name", name);
             map.put("countryId", countryId);
@@ -49,7 +52,7 @@ public class CityController {
                 () -> new ResourceNotFoundException("City","id",data.getId())
         );
 
-        Map<String, String> map = new LinkedHashMap<>();
+        Map<String, String> map = new HashMap<>();
         map.put("id",existingCity.getId().toString());
         map.put("name", existingCity.getName());
         map.put("countryId", existingCity.getCountry().getId().toString());
@@ -59,22 +62,22 @@ public class CityController {
 
     //Create a new city
     @PostMapping
-    public ResponseEntity<?> createCity(CityDTO data){
-        cityService.cityCreateValidate(data);
+    public ResponseEntity<?> saveCity(CityDTO data){
+        cityService.CitySaveValidate(data);
         return new ResponseEntity<>(null,HttpStatus.OK);
     }
 
     //Update a city
     @PutMapping
     public ResponseEntity<?> updateCity(CityDTO data){
-        cityService.cityUpdateValidate(data);
+        cityService.CityUpdateValidate(data);
         return new ResponseEntity<>(null,HttpStatus.OK);
     }
 
     //Delete a city by an ID
     @DeleteMapping
     public ResponseEntity<?> DeleteCity(IdDTO data){
-        cityService.cityDeleteValidate(data);
+        cityService.CityDeleteValidate(data);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }
