@@ -18,8 +18,13 @@ public class Match {
     @JoinColumn(name = "petID")
     private Pet petID;
 
-    @Column(name = "isActive")
-    private Boolean isActive;
+    public Match() {
+    }
+
+    public Match(User adopterID, Pet petID) {
+        this.adopterID = adopterID;
+        this.petID = petID;
+    }
 
     public Long getId() {
         return id;
@@ -45,12 +50,5 @@ public class Match {
         this.petID = petID;
     }
 
-    public Boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
-    }
 
 }

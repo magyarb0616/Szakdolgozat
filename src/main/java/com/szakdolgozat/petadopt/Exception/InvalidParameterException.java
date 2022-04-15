@@ -5,18 +5,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_ACCEPTABLE)
-public class NullException extends RuntimeException{
+public class InvalidParameterException extends RuntimeException{
     private String resourceName;
     private String fieldName;
+    private Object fieldValue;
 
-    public NullException(String resourceName, String fieldName) {
-        super(String.format("%s.%s cannot be null!",resourceName, fieldName));
+    public InvalidParameterException(String resourceName, String fieldName, Object fieldValue) {
+        super(String.format("%s.%s cannot be: '%s'",resourceName, fieldName, fieldValue));
         this.resourceName = resourceName;
         this.fieldName = fieldName;
-    }
-
-    public NullException(String message) {
-        super(message);
+        this.fieldValue = fieldValue;
     }
 
     public String getResourceName() {
@@ -33,5 +31,13 @@ public class NullException extends RuntimeException{
 
     public void setFieldName(String fieldName) {
         this.fieldName = fieldName;
+    }
+
+    public Object getFieldValue() {
+        return fieldValue;
+    }
+
+    public void setFieldValue(Object fieldValue) {
+        this.fieldValue = fieldValue;
     }
 }

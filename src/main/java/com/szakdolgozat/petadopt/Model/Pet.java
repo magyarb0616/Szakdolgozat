@@ -54,6 +54,24 @@ public class Pet {
     @OneToMany(mappedBy = "petID")
     private Set<Match> matches = new LinkedHashSet<>();
 
+
+    public Pet() {
+    }
+
+    public Pet(User adoptive, String name, Integer age, Boolean sex, Integer size, Integer hair, Integer movement, String description, Integer score, Breed breed, City city) {
+        this.adoptive = adoptive;
+        this.name = name;
+        this.age = age;
+        this.sex = sex;
+        this.size = size;
+        this.hair = hair;
+        this.movement = movement;
+        this.description = description;
+        this.score = score;
+        this.breed = breed;
+        this.city = city;
+    }
+
     public Long getId() {
         return id;
     }

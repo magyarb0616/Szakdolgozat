@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.szakdolgozat</groupId>
 	<artifactId>petadopt</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.5.0-SNAPSHOT</version>
 	<name>petadopt</name>
 	<description>Magyar Bence - Szakdolgozat 2022 PTE TTK PTI</description>
 	<properties>

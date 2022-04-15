@@ -39,6 +39,7 @@ public class CityController {
             map.put("countryId", countryId);
             out.add(map);
         }
+
         return out;
     }
 

@@ -47,7 +47,7 @@ public class BreedService {
             existingBreed.setName(data.getName());
             existingBreed.setSpecies(speciesRepository.getById(data.getSpeciesId()));
             breedRepository.save(existingBreed);
-        } else { throw new ResourceNotFoundException("Spedcies","id",data.getSpeciesId()); }
+        } else { throw new ResourceNotFoundException("Spedcies","id",data.getSpeciesId());  }
     }
 
     public void deleteBreedValidate(IdDTO data){
