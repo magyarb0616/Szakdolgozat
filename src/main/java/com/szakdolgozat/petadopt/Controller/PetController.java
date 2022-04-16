@@ -1,18 +1,17 @@
 package com.szakdolgozat.petadopt.Controller;
 
 import com.szakdolgozat.petadopt.DTO.IdDTO;
+import com.szakdolgozat.petadopt.DTO.ImageDTO;
 import com.szakdolgozat.petadopt.DTO.PetDTO;
 import com.szakdolgozat.petadopt.Exception.ResourceNotFoundException;
 import com.szakdolgozat.petadopt.Model.Pet;
 import com.szakdolgozat.petadopt.Repository.PetRepository;
+import com.szakdolgozat.petadopt.Service.ImageService;
 import com.szakdolgozat.petadopt.Service.PetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -26,6 +25,8 @@ public class PetController {
     private PetRepository petRepository;
     @Autowired
     private PetService petService;
+    @Autowired
+    private ImageService imageService;
 
     @GetMapping(path = "/list")
     public List<Map<String, String>> getAllPets(){
@@ -104,6 +105,37 @@ public class PetController {
         petService.createPetValidate(data);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
+
+    @PutMapping
+    public ResponseEntity<?> updatePet(PetDTO data){
+        petService.updatePetValidate(data);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deletePet(IdDTO data){
+        petService.deletePetValidate(data);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+    //------ Image ------//
+    @GetMapping(path = "/image/list")
+    public List<Map<String, String>> getPetImages(IdDTO data) {
+        List<Map<String, String>> out = imageService.getAllImagesByPet(data);
+        return out;
+    }
+
+    @PostMapping(path = "/image")
+    public ResponseEntity<?> createImage(ImageDTO data){
+        imageService.createImage(data);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/image")
+    public ResponseEntity<?> deleteImage(IdDTO data){
+        imageService.deleteImage(data);
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
 
 
 }

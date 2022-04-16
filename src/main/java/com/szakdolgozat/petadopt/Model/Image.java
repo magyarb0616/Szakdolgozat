@@ -17,6 +17,14 @@ public class Image {
     @JoinColumn(name = "petID")
     private Pet petID;
 
+    public Image() {
+    }
+
+    public Image(String path, Pet petID) {
+        this.path = path;
+        this.petID = petID;
+    }
+
     public Long getId() {
         return id;
     }

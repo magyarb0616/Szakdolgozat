@@ -152,6 +152,10 @@ public class Pet {
         this.score = score;
     }
 
+    public void incrementScore(){
+        this.score++;
+    }
+
     public Breed getBreed() {
         return breed;
     }
