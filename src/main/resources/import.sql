@@ -1,3 +1,6 @@
+INSERT INTO ROLES VALUES(1,'ROLE_USER');
+INSERT INTO ROLES VALUES(2,'ROLE_ADMIN');
+
 INSERT INTO COUNTRY VALUES(1,'Hungary');
 INSERT INTO COUNTRY VALUES(2,'Germany');
 
@@ -16,9 +19,9 @@ INSERT INTO BREED VALUES(3,'Nemetjuhasz',1);
 INSERT INTO BREED VALUES(4,'Hazimacska',2);
 INSERT INTO BREED VALUES(5,'Vadmacska',2);
 
-INSERT INTO USER VALUES(1,'magyarb0616@gmail.com','Bence',1,'hash_value','06305030967','Magyar',1);
-INSERT INTO USER VALUES(2,'kisjani@gmail.com','Janos',0,'hash_value','06305870967','Kis',1);
-INSERT INTO USER VALUES(3,'blabla@gmail.com','Tunde',0,'hash_value','063057532967','Toth',2);
+INSERT INTO USER VALUES(1,'magyarb0616@gmail.com','Bence','pas123','06305030967','Magyar','magyarb',1);
+INSERT INTO USER VALUES(2,'kisjani@gmail.com','Janos','pas123','06305870967','Kis','kisjanesz',1);
+INSERT INTO USER VALUES(3,'blabla@gmail.com','Tunde','pas123','063057532967','Toth','tundike',2);
 
 INSERT INTO PET VALUES(1,2,'lorem ipsum',1,2,'Yoda',0,1,1,1,1,1);
 INSERT INTO PET VALUES(2,4,'lorem ipsum',1,3,'Drazse',0,1,1,1,2,1);
@@ -34,3 +37,4 @@ INSERT INTO IMAGE VALUES(6,'drive/images/6.jpg',3);
 INSERT INTO IMAGE VALUES(7,'drive/images/7.jpg',3);
 INSERT INTO IMAGE VALUES(8,'drive/images/8.jpg',1);
 INSERT INTO IMAGE VALUES(9,'drive/images/9.jpg',2);
+
