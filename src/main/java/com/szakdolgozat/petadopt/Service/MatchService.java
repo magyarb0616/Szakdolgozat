@@ -1,7 +1,6 @@
 package com.szakdolgozat.petadopt.Service;
 
-import com.szakdolgozat.petadopt.DTO.MatchDTO;
-import com.szakdolgozat.petadopt.Exception.NullException;
+import com.szakdolgozat.petadopt.DTO.IdDTO;
 import com.szakdolgozat.petadopt.Exception.ResourceNotFoundException;
 import com.szakdolgozat.petadopt.Model.Match;
 import com.szakdolgozat.petadopt.Model.Pet;
@@ -23,23 +22,17 @@ public class MatchService {
     private UserRepository userRepository;
     @Autowired
     private PetRepository petRepository;
+    @Autowired
+    private UserUtils userUtils;
 
     @Transactional
-    public void createMatchValidate(MatchDTO data){
-        if (data.getAdopterID() == 0 || data.getPetID() == 0){
-            throw new NullException("userID or petID cannot be null or zero");
-        } else if (userRepository.existsById(data.getAdopterID())){
-            if (petRepository.existsById(data.getPetID())){
-                matchRepository.save(new Match(userRepository.getById(data.getAdopterID()),
-                        petRepository.getById(data.getPetID())));
-
-                Pet pet = petRepository.getById(data.getPetID());
-                pet.incrementScore();
-                petRepository.save(pet);
-
-            } else throw new ResourceNotFoundException("Pet","id",data.getPetID());
-        } else throw new ResourceNotFoundException("User","id",data.getAdopterID());
+    public void createMatchValidate(IdDTO pet) {
+        if (petRepository.existsById(pet.getId())) {
+            matchRepository.save(new Match(userUtils.getRequestingUser(), petRepository.getById(pet.getId())));
+            Pet existingPet = petRepository.getById(pet.getId());
+            existingPet.incrementScore();
+            petRepository.save(existingPet);
+        }
+        throw new ResourceNotFoundException("Pet", "id", pet.getId());
     }
-
-
 }

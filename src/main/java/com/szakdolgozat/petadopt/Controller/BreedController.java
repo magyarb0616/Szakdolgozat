@@ -10,6 +10,7 @@ import com.szakdolgozat.petadopt.Service.BreedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -57,18 +58,21 @@ public class BreedController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> createBreed(BreedDTO data){
         breedService.createBreedValidate(data);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateBreed(BreedDTO data){
         breedService.updateBreedValidate(data);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @DeleteMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> deleteBreed(IdDTO data){
         breedService.deleteBreedValidate(data);
         return new ResponseEntity<>(null, HttpStatus.OK);

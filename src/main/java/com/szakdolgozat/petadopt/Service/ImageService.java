@@ -4,6 +4,7 @@ package com.szakdolgozat.petadopt.Service;
 import com.szakdolgozat.petadopt.DTO.IdDTO;
 import com.szakdolgozat.petadopt.DTO.ImageDTO;
 import com.szakdolgozat.petadopt.Exception.AlreadyExistsException;
+import com.szakdolgozat.petadopt.Exception.NoRightException;
 import com.szakdolgozat.petadopt.Exception.ResourceNotFoundException;
 import com.szakdolgozat.petadopt.Model.Image;
 import com.szakdolgozat.petadopt.Repository.ImageRepository;
@@ -24,6 +25,8 @@ public class ImageService {
     private ImageRepository imageRepository;
     @Autowired
     private PetRepository petRepository;
+    @Autowired
+    private UserUtils userUtils;
 
 
     public List<Map<String, String>> getAllImagesByPet(IdDTO data){
@@ -48,16 +51,22 @@ public class ImageService {
 
     public void deleteImage(IdDTO data){
         if (imageRepository.existsById(data.getId())){
-            imageRepository.deleteById(data.getId());
+            if (userUtils.isAdmin() == 0 || userUtils.isAdmin() == imageRepository.getById(data.getId()).getPetID().getAdoptive().getId()){
+                imageRepository.deleteById(data.getId());
+            } else throw new NoRightException("delete","image");
         } else throw new ResourceNotFoundException("Image","id",data.getId());
     }
 
     public void createImage(ImageDTO data){
         if (petRepository.existsById(data.getPetID())){
-            if (!imageRepository.existsImageByPath(data.getPath())){
-                imageRepository.save(new Image(data.getPath(), petRepository.getById(data.getPetID())));
-            }else { throw new AlreadyExistsException("Pet","path",data.getPath()); }
+            if (userUtils.isAdmin() == 0 || userUtils.isAdmin() == petRepository.getById(data.getPetID()).getAdoptive().getId()){
+                if (!imageRepository.existsImageByPath(data.getPath())){
+                    imageRepository.save(new Image(data.getPath(), petRepository.getById(data.getPetID())));
+                }else { throw new AlreadyExistsException("Pet","path",data.getPath()); }
+            } else { throw new NoRightException("create","image"); }
         } else { throw new ResourceNotFoundException("Pet","id",data.getPetID()); }
+
+
     }
 
 

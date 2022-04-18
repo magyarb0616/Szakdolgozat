@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Long> {
     List<Match> findAllByAdopterID_Id(Long id);
+    Boolean existsByPetID_Id(Long id);
+    void deleteAllByPetID_Id(Long id);
 
 
 }

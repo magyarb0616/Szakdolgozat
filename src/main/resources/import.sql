@@ -19,9 +19,14 @@ INSERT INTO BREED VALUES(3,'Nemetjuhasz',1);
 INSERT INTO BREED VALUES(4,'Hazimacska',2);
 INSERT INTO BREED VALUES(5,'Vadmacska',2);
 
-INSERT INTO USER VALUES(1,'magyarb0616@gmail.com','Bence','pas123','06305030967','Magyar','magyarb',1);
-INSERT INTO USER VALUES(2,'kisjani@gmail.com','Janos','pas123','06305870967','Kis','kisjanesz',1);
-INSERT INTO USER VALUES(3,'blabla@gmail.com','Tunde','pas123','063057532967','Toth','tundike',2);
+INSERT INTO USER VALUES(1,'magyarb0616@gmail.com','Bence','$2a$10$3pPaFVs92rG2aszyDdiMeeaOIsae05vNNHjYY9pNWyB.J7GdjdHzu','06305030967','Magyar','magyarb',1);
+INSERT INTO USER VALUES(2,'kisjani@gmail.com','Janos','$2a$10$3pPaFVs92rG2aszyDdiMeeaOIsae05vNNHjYY9pNWyB.J7GdjdHzu','06305870967','Kis','kisjanesz',1);
+INSERT INTO USER VALUES(3,'blabla@gmail.com','Tunde','$2a$10$3pPaFVs92rG2aszyDdiMeeaOIsae05vNNHjYY9pNWyB.J7GdjdHzu','063057532967','Toth','tundike',2);
+
+INSERT INTO USER_ROLES VALUES(1,1);
+INSERT INTO USER_ROLES VALUES(1,2);
+INSERT INTO USER_ROLES VALUES(2,1);
+INSERT INTO USER_ROLES VALUES(3,1);
 
 INSERT INTO PET VALUES(1,2,'lorem ipsum',1,2,'Yoda',0,1,1,1,1,1);
 INSERT INTO PET VALUES(2,4,'lorem ipsum',1,3,'Drazse',0,1,1,1,2,1);

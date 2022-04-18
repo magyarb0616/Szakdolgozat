@@ -17,6 +17,10 @@ public class InvalidParameterException extends RuntimeException{
         this.fieldValue = fieldValue;
     }
 
+    public InvalidParameterException(String message) {
+        super(message);
+    }
+
     public String getResourceName() {
         return resourceName;
     }

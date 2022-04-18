@@ -12,6 +12,7 @@ import com.szakdolgozat.petadopt.Service.SpeciesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -74,18 +75,21 @@ public class SpeciesController {
 
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> createSpecies(SpeciesDTO data){
         speciesService.speciesCreateValidate(data);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateSpecies(SpeciesDTO data){
         speciesService.speciesUpdateValidate(data);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @DeleteMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> deleteSpecies(IdDTO data){
         speciesService.speciesDeleteValidate(data);
         return new ResponseEntity<>(null, HttpStatus.OK);

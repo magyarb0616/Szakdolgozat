@@ -10,6 +10,7 @@ import com.szakdolgozat.petadopt.Service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -60,6 +61,7 @@ public class CityController {
 
     //Create a new city
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> createCity(CityDTO data){
         cityService.cityCreateValidate(data);
         return new ResponseEntity<>(null,HttpStatus.OK);
@@ -67,6 +69,7 @@ public class CityController {
 
     //Update a city
     @PutMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateCity(CityDTO data){
         cityService.cityUpdateValidate(data);
         return new ResponseEntity<>(null,HttpStatus.OK);
@@ -74,6 +77,7 @@ public class CityController {
 
     //Delete a city by an ID
     @DeleteMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> DeleteCity(IdDTO data){
         cityService.cityDeleteValidate(data);
         return new ResponseEntity<>(null, HttpStatus.OK);

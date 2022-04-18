@@ -11,6 +11,7 @@ import com.szakdolgozat.petadopt.Service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -76,18 +77,21 @@ public class CountryController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> createCountry(CountryDTO data){
         countryService.countryCreateValidate(data);
         return new ResponseEntity<>(null,HttpStatus.OK);
     }
 
     @PutMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateCountry(CountryDTO data){
         countryService.countryUpdateValidate(data);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @DeleteMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> deleteCountry(IdDTO data){
         countryService.countryDeleteValidate(data);
         return new ResponseEntity<>(null, HttpStatus.OK);

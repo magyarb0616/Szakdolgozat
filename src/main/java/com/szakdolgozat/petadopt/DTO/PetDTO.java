@@ -2,7 +2,6 @@ package com.szakdolgozat.petadopt.DTO;
 
 public class PetDTO {
     private Long id;
-    private Long adoptiveId;
     private String name;
     private Integer age;
     private Boolean sex;
@@ -21,14 +20,6 @@ public class PetDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getAdoptiveId() {
-        return adoptiveId;
-    }
-
-    public void setAdoptiveId(Long adoptiveId) {
-        this.adoptiveId = adoptiveId;
     }
 
     public String getName() {
