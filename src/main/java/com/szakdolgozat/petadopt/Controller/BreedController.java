@@ -68,7 +68,7 @@ public class BreedController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateBreed(BreedDTO data){
         breedService.updateBreedValidate(data);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK); //TODO fix every responseEntity messages to ResponseEntity.ok(" xxx ") type
     }
 
     @DeleteMapping

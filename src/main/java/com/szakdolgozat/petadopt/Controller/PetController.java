@@ -115,7 +115,7 @@ public class PetController {
     @DeleteMapping
     public ResponseEntity<?> deletePet(IdDTO data){
         petService.deletePetValidate(data);
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return ResponseEntity.ok("Delete successfull!");
     }
     //------ Image ------//
     @GetMapping(path = "/image/list")
