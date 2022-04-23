@@ -20,7 +20,7 @@ INSERT INTO BREED VALUES(4,'Hazimacska',2);
 INSERT INTO BREED VALUES(5,'Vadmacska',2);
 
 INSERT INTO USER VALUES(1,'magyarb0616@gmail.com','Bence','$2a$10$3pPaFVs92rG2aszyDdiMeeaOIsae05vNNHjYY9pNWyB.J7GdjdHzu','06305030967','Magyar','magyarb',1);
-INSERT INTO USER VALUES(2,'kisjani@gmail.com','Janos','$2a$10$3pPaFVs92rG2aszyDdiMeeaOIsae05vNNHjYY9pNWyB.J7GdjdHzu','06305870967','Kis','kisjanesz',1);
+INSERT INTO USER VALUES(2,'kisjani@gmail.com','Janos','$2a$10$3pPaFVs92rG2aszyDdiMeeaOIsae05vNNHjYY9pNWyB.J7GdjdHzu','06305870967','Kis','jancsi',1);
 INSERT INTO USER VALUES(3,'blabla@gmail.com','Tunde','$2a$10$3pPaFVs92rG2aszyDdiMeeaOIsae05vNNHjYY9pNWyB.J7GdjdHzu','063057532967','Toth','tundike',2);
 
 INSERT INTO USER_ROLES VALUES(1,1);

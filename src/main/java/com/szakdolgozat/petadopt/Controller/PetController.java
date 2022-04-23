@@ -13,10 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping(path = "api/pet")
@@ -43,6 +40,7 @@ public class PetController {
             String hair = pet.getHair().toString();
             String movement = pet.getMovement().toString();
             String description = pet.getDescription();
+            String speciesId = pet.getBreed().getSpecies().getId().toString();
             String breedId = pet.getBreed().getId().toString();
             String cityId = pet.getCity().getId().toString();
 
@@ -57,6 +55,7 @@ public class PetController {
             map.put("hair",hair);
             map.put("movement",movement);
             map.put("description",description);
+            map.put("speciesId", speciesId);
             map.put("breedId",breedId);
             map.put("cityId",cityId);
 
@@ -81,6 +80,7 @@ public class PetController {
         String hair = existingPet.getHair().toString();
         String movement = existingPet.getMovement().toString();
         String description = existingPet.getDescription();
+        String speciesId = existingPet.getBreed().getSpecies().getId().toString();
         String breedId = existingPet.getBreed().getId().toString();
         String cityId = existingPet.getCity().getId().toString();
 
@@ -93,12 +93,72 @@ public class PetController {
         map.put("hair",hair);
         map.put("movement",movement);
         map.put("description",description);
+        map.put("speciesId", speciesId);
         map.put("breedId",breedId);
         map.put("cityId",cityId);
         return map;
 
     }
 
+@GetMapping(path = "/random")
+public List<Map<String, String>> getRandomPets(){
+    List<Pet> pets = new ArrayList<>();
+    Long one = getRandomPetId();//TODO 3 unique id gen
+    Long two = getRandomPetId();
+    Long three = getRandomPetId();
+
+        do{
+            one = getRandomPetId();
+            two = getRandomPetId();
+            three = getRandomPetId();
+        }while (one.equals(two) || one.equals(three) || two.equals(three));
+
+    System.out.println("A: "+one+", B: "+two+", C: "+three);
+
+    pets.add(petRepository.getById(one));
+    pets.add(petRepository.getById(two));
+    pets.add(petRepository.getById(three));
+
+        List<Map<String, String>> out = new ArrayList<>();
+
+    for (Pet pet: pets){
+        String id = pet.getId().toString();
+        String adoptiveId = pet.getAdoptive().getId().toString();
+        String name = pet.getName();
+        String age = pet.getAge().toString();
+        String sex = pet.getSex().toString();
+        String size = pet.getSize().toString();
+        String hair = pet.getHair().toString();
+        String movement = pet.getMovement().toString();
+        String description = pet.getDescription();
+        String speciesId = pet.getBreed().getSpecies().getId().toString();
+        String speciesName = pet.getBreed().getSpecies().getName();
+        String breedId = pet.getBreed().getId().toString();
+        String breedName = pet.getBreed().getName();
+        String cityId = pet.getCity().getId().toString();
+
+        Map<String, String> map = new LinkedHashMap<>();
+
+        map.put("id",id);
+        map.put("adoptiveId",adoptiveId);
+        map.put("name",name);
+        map.put("age",age);
+        map.put("sex",sex);
+        map.put("size",size);
+        map.put("hair",hair);
+        map.put("movement",movement);
+        map.put("description",description);
+        map.put("speciesId", speciesId);
+        map.put("speciesName", speciesName);
+        map.put("breedId",breedId);
+        map.put("breedName", breedName);
+        map.put("cityId",cityId);
+
+        out.add(map);
+    }
+    return out;
+
+}
 
     @PostMapping
     public ResponseEntity<?> createPet(PetDTO data){
@@ -136,6 +196,15 @@ public class PetController {
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
-
+    public Long getRandomPetId(){
+        long leftLimit = 1L;
+        long rightLimit = petRepository.count();
+        System.out.println("db: "+rightLimit);
+        long generatedLong;
+        do {
+            generatedLong = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+        }while (!petRepository.existsPetById(generatedLong));
+        return generatedLong;
+    }
 
 }
