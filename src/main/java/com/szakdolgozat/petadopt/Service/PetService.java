@@ -114,6 +114,51 @@ public class PetService {
         } else throw new ResourceNotFoundException("Pet","user",data.getId());
     }
 
+    public String petHair(Integer value){
+        switch (value){
+            case 1 : return "Short";
+            case 2 : return "Moderate";
+            case 3 : return "Long";
+            default: return "Unknown";
+        }
+    }
+
+    public String petSize(Integer value){
+        switch (value){
+            case 1 : return "Small";
+            case 2 : return "Medium";
+            case 3 : return "Large";
+            default: return "Unknown";
+        }
+    }
+
+    public String petMovement(Integer value){
+        switch (value){
+            case 1 : return "Small";
+            case 2 : return "Medium";
+            case 3 : return "High";
+            default: return "Unknown";
+        }
+    }
+
+    public String petSex(Boolean value){
+       if (true){
+           return "Male";
+    } else { return "Female"; }
+
+}
+
+
+
+
+
+
+
+
+
 
 
 }
+
+
+

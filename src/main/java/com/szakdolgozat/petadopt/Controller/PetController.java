@@ -8,6 +8,7 @@ import com.szakdolgozat.petadopt.Model.Pet;
 import com.szakdolgozat.petadopt.Repository.PetRepository;
 import com.szakdolgozat.petadopt.Service.ImageService;
 import com.szakdolgozat.petadopt.Service.PetService;
+import com.szakdolgozat.petadopt.Service.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,8 @@ public class PetController {
     private PetService petService;
     @Autowired
     private ImageService imageService;
+    @Autowired
+    private UserUtils userUtils;
 
     @GetMapping(path = "/list")
     public List<Map<String, String>> getAllPets(){
@@ -102,8 +105,9 @@ public class PetController {
 
 @GetMapping(path = "/random")
 public List<Map<String, String>> getRandomPets(){
+    System.out.println("Requester: "+userUtils.getRequestingUser().getUsername());
     List<Pet> pets = new ArrayList<>();
-    Long one = getRandomPetId();//TODO 3 unique id gen
+    Long one = getRandomPetId();
     Long two = getRandomPetId();
     Long three = getRandomPetId();
 
@@ -126,16 +130,18 @@ public List<Map<String, String>> getRandomPets(){
         String adoptiveId = pet.getAdoptive().getId().toString();
         String name = pet.getName();
         String age = pet.getAge().toString();
-        String sex = pet.getSex().toString();
-        String size = pet.getSize().toString();
-        String hair = pet.getHair().toString();
-        String movement = pet.getMovement().toString();
+        String sex = petService.petSex(pet.getSex());
+        String size = petService.petSize(pet.getSize());
+        String hair = petService.petHair(pet.getHair());
+        String movement = petService.petMovement(pet.getMovement());
         String description = pet.getDescription();
         String speciesId = pet.getBreed().getSpecies().getId().toString();
         String speciesName = pet.getBreed().getSpecies().getName();
         String breedId = pet.getBreed().getId().toString();
         String breedName = pet.getBreed().getName();
         String cityId = pet.getCity().getId().toString();
+        String cityName = pet.getCity().getName();
+        String countryName = pet.getCity().getCountry().getName();
 
         Map<String, String> map = new LinkedHashMap<>();
 
@@ -153,6 +159,8 @@ public List<Map<String, String>> getRandomPets(){
         map.put("breedId",breedId);
         map.put("breedName", breedName);
         map.put("cityId",cityId);
+        map.put("cityName", cityName);
+        map.put("countryName", countryName);
 
         out.add(map);
     }
@@ -202,7 +210,7 @@ public List<Map<String, String>> getRandomPets(){
         System.out.println("db: "+rightLimit);
         long generatedLong;
         do {
-            generatedLong = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+            generatedLong = leftLimit + (long) (Math.random() * rightLimit);
         }while (!petRepository.existsPetById(generatedLong));
         return generatedLong;
     }

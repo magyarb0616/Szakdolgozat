@@ -31,8 +31,7 @@ public class MatchService {
             matchRepository.save(new Match(userUtils.getRequestingUser(), petRepository.getById(pet.getId())));
             Pet existingPet = petRepository.getById(pet.getId());
             existingPet.incrementScore();
-            petRepository.save(existingPet);
-        }
-        throw new ResourceNotFoundException("Pet", "id", pet.getId());
+            petRepository.save(existingPet); //todo do nothing if the match exists already
+        } else {  throw new ResourceNotFoundException("Pet", "id", pet.getId()); }
     }
 }

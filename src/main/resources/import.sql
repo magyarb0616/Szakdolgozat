@@ -10,14 +10,14 @@ INSERT INTO CITY VALUES(3,'Balatonboglar',1);
 INSERT INTO CITY VALUES(4,'Hamburg',2);
 INSERT INTO CITY VALUES(5,'Saltzburg',2);
 
-INSERT INTO SPECIES VALUES(1,'Kutya');
-INSERT INTO SPECIES VALUES(2,'Macska');
+INSERT INTO SPECIES VALUES(1,'Dog');
+INSERT INTO SPECIES VALUES(2,'Cat');
 
-INSERT INTO BREED VALUES(1,'Francia buldog',1);
-INSERT INTO BREED VALUES(2,'Magyar Vizsla',1);
-INSERT INTO BREED VALUES(3,'Nemetjuhasz',1);
-INSERT INTO BREED VALUES(4,'Hazimacska',2);
-INSERT INTO BREED VALUES(5,'Vadmacska',2);
+INSERT INTO BREED VALUES(1,'French buldog',1);
+INSERT INTO BREED VALUES(2,'Hungarian vizsla',1);
+INSERT INTO BREED VALUES(3,'i dont know really',1);
+INSERT INTO BREED VALUES(4,'catmat',2);
+INSERT INTO BREED VALUES(5,'Actually a cat',2);
 
 INSERT INTO USER VALUES(1,'magyarb0616@gmail.com','Bence','$2a$10$3pPaFVs92rG2aszyDdiMeeaOIsae05vNNHjYY9pNWyB.J7GdjdHzu','06305030967','Magyar','magyarb',1);
 INSERT INTO USER VALUES(2,'kisjani@gmail.com','Janos','$2a$10$3pPaFVs92rG2aszyDdiMeeaOIsae05vNNHjYY9pNWyB.J7GdjdHzu','06305870967','Kis','jancsi',1);
@@ -28,7 +28,7 @@ INSERT INTO USER_ROLES VALUES(1,2);
 INSERT INTO USER_ROLES VALUES(2,1);
 INSERT INTO USER_ROLES VALUES(3,1);
 
-INSERT INTO PET VALUES(1,2,'lorem ipsum',1,2,'Yoda',0,1,1,1,1,1);
+INSERT INTO PET VALUES(1,2,'lorem ipsum fcf hfdg sgh fsd hfghghkff  gsh sgh sfg gsrhgsfjdhfg  gfhgfghsf gfhsfghgsfg ghgsg hddjh jloék lrfzlr re tzre  hjgkfghj klkfzu luz lfurz lfgkjlfg lf lfhl',1,2,'Yoda',0,1,1,1,1,1);
 INSERT INTO PET VALUES(2,4,'lorem ipsum',1,3,'Drazse',0,1,1,1,2,1);
 INSERT INTO PET VALUES(3,7,'lorem ipsum',3,2,'Cucli',0,0,2,2,3,2);
 INSERT INTO PET VALUES(4,1,'lorem ipsum',2,1,'Kampó',0,1,3,2,3,1);
