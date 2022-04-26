@@ -1,6 +1,7 @@
 package com.szakdolgozat.petadopt.Service;
 
 import com.szakdolgozat.petadopt.DTO.IdDTO;
+import com.szakdolgozat.petadopt.Exception.AlreadyExistsException;
 import com.szakdolgozat.petadopt.Exception.ResourceNotFoundException;
 import com.szakdolgozat.petadopt.Model.Match;
 import com.szakdolgozat.petadopt.Model.Pet;
@@ -28,10 +29,13 @@ public class MatchService {
     @Transactional
     public void createMatchValidate(IdDTO pet) {
         if (petRepository.existsById(pet.getId())) {
-            matchRepository.save(new Match(userUtils.getRequestingUser(), petRepository.getById(pet.getId())));
-            Pet existingPet = petRepository.getById(pet.getId());
-            existingPet.incrementScore();
-            petRepository.save(existingPet); //todo do nothing if the match exists already
+            if (!matchRepository.existsByPetID_IdAndAdopterID_Id(pet.getId(),userUtils.getRequestingUser().getId())) {
+                matchRepository.save(new Match(userUtils.getRequestingUser(), petRepository.getById(pet.getId())));
+
+                Pet existingPet = petRepository.getById(pet.getId());
+                existingPet.incrementScore();
+                petRepository.save(existingPet); //todo do nothing if the match exists already
+            } else { throw new AlreadyExistsException("Match","value",0); }
         } else {  throw new ResourceNotFoundException("Pet", "id", pet.getId()); }
     }
 }

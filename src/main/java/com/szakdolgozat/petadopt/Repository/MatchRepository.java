@@ -12,5 +12,7 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
     Boolean existsByPetID_Id(Long id);
     void deleteAllByPetID_Id(Long id);
 
+    Boolean existsByPetID_IdAndAdopterID_Id(Long petID, Long adopterID);
+
 
 }

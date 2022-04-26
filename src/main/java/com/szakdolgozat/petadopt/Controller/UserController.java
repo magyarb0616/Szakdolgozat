@@ -76,6 +76,8 @@ public class UserController {
         String phone = existingUser.getPhone();
         String cityId = existingUser.getCity().getId().toString();
         String cityName = existingUser.getCity().getName();
+        String countryName = existingUser.getCity().getCountry().getName();
+        String countryId = existingUser.getCity().getCountry().getId().toString();
 
         map.put("id",id);
         map.put("username",username);
@@ -85,12 +87,14 @@ public class UserController {
         map.put("phone",phone);
         map.put("cityId",cityId);
         map.put("cityName",cityName);
+        map.put("countryName",countryName);
+        map.put("countryId", countryId);
 
         return map;
     }
 
-    @PutMapping
-    public ResponseEntity<?> updateUser(UserUpdateDTO data){
+    @PostMapping(path = "/update")
+    public ResponseEntity<?> updateUser(@RequestBody UserUpdateDTO data){
         //System.out.println("id: "+data.getId()+", city: "+data.getCityId()+" email:"+data.getEmail());
         userService.updateUserValidate(data);
         return ResponseEntity.ok(new MessageResponse("User successfully updated!"));
@@ -103,7 +107,7 @@ public class UserController {
     }
 
     @PostMapping(path = "/changePassword")
-    public ResponseEntity<?> changePassword(PasswordChangeRequest data){
+    public ResponseEntity<?> changePassword(@RequestBody PasswordChangeRequest data){
         userService.changePassword(data);
         return ResponseEntity.ok("Password changed successfully!");
     }

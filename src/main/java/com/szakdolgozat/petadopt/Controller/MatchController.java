@@ -100,7 +100,7 @@ public class MatchController {
         return ResponseEntity.ok("succesfull");
     }
 
-    @DeleteMapping
+    @PostMapping(path = "/delete")
     public ResponseEntity<?> deleteMatch(IdDTO data){
         if (matchRepository.existsById(data.getId())){
             if (userUtils.isAdmin() == 0 || userUtils.isAdmin() == matchRepository.getById(data.getId()).getAdopterID().getId()){

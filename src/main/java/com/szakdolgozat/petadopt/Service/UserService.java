@@ -12,6 +12,7 @@ import com.szakdolgozat.petadopt.Model.User;
 import com.szakdolgozat.petadopt.Repository.CityRepository;
 import com.szakdolgozat.petadopt.Repository.PetRepository;
 import com.szakdolgozat.petadopt.Repository.UserRepository;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -37,7 +38,7 @@ public class UserService {
     public void updateUserValidate(UserUpdateDTO data){
         if (userUtils.isAdmin() == 0 || userUtils.isAdmin() == data.getId()){
             if (userRepository.existsById(data.getId())){
-                if (!userRepository.existsByEmail(data.getEmail())){
+                if (!userRepository.existsByEmail(data.getEmail())  || data.getEmail().equals(userRepository.getById(data.getId()).getEmail())){
                     User user = userRepository.getById(data.getId());
                     user.setEmail(data.getEmail());
                     user.setSurname(data.getSurname());
