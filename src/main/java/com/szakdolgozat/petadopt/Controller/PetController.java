@@ -67,6 +67,57 @@ public class PetController {
         return out;
     }
 
+    @GetMapping(path = "/mypets")
+    public List<Map<String, String>> getMyPets(){
+        List<Pet> pets = petRepository.getAllByAdoptive_Id(userUtils.getRequestingUser().getId());
+        List<Map<String, String>> out = new ArrayList<>();
+
+        for (Pet pet: pets){
+            String id = pet.getId().toString();
+            String adoptiveId = pet.getAdoptive().getId().toString();
+            String name = pet.getName();
+            String age = pet.getAge().toString();
+            String sex = pet.getSex().toString();
+            String size = pet.getSize().toString();
+            String hair = pet.getHair().toString();
+            String movement = pet.getMovement().toString();
+            String description = pet.getDescription();
+            String speciesId = pet.getBreed().getSpecies().getId().toString();
+            String speciesName = pet.getBreed().getSpecies().getName();
+            String breedId = pet.getBreed().getId().toString();
+            String breedName = pet.getBreed().getName();
+            String cityId = pet.getCity().getId().toString();
+            String countryId = pet.getCity().getCountry().getId().toString();
+            String cityName = pet.getCity().getName();
+            String countryName = pet.getCity().getCountry().getName();
+
+            Map<String, String> map = new LinkedHashMap<>();
+
+            map.put("id",id);
+            map.put("adoptiveId",adoptiveId);
+            map.put("name",name);
+            map.put("age",age);
+            map.put("sex",sex);
+            map.put("size",size);
+            map.put("hair",hair);
+            map.put("movement",movement);
+            map.put("description",description);
+            map.put("speciesId", speciesId);
+            map.put("speciesName", speciesName);
+            map.put("breedId",breedId);
+            map.put("breedName", breedName);
+            map.put("cityId",cityId);
+            map.put("cityName", cityName);
+            map.put("countryId", countryId);
+            map.put("countryName", countryName);
+
+            out.add(map);
+        }
+        return out;
+    }
+
+
+
     @GetMapping
     public Map<String, String> getPetByID(IdDTO data){
         Pet existingPet = petRepository.findById(data.getId()).orElseThrow(
@@ -142,6 +193,7 @@ public List<Map<String, String>> getRandomPets(){
         String cityId = pet.getCity().getId().toString();
         String cityName = pet.getCity().getName();
         String countryName = pet.getCity().getCountry().getName();
+        String countryId = pet.getCity().getCountry().getId().toString();
 
         Map<String, String> map = new LinkedHashMap<>();
 
