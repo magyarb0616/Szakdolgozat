@@ -2,6 +2,7 @@ package com.szakdolgozat.petadopt.Controller;
 
 import com.szakdolgozat.petadopt.DTO.IdDTO;
 import com.szakdolgozat.petadopt.DTO.ImageDTO;
+import com.szakdolgozat.petadopt.DTO.PetCreateDTO;
 import com.szakdolgozat.petadopt.DTO.PetDTO;
 import com.szakdolgozat.petadopt.Exception.ResourceNotFoundException;
 import com.szakdolgozat.petadopt.Model.Pet;
@@ -221,13 +222,14 @@ public List<Map<String, String>> getRandomPets(){
 }
 
     @PostMapping
-    public ResponseEntity<?> createPet(PetDTO data){
+    public ResponseEntity<?> createPet(@RequestBody PetCreateDTO data){
+        System.out.println(userUtils.getRequestingUser().getUsername());
         petService.createPetValidate(data);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @PutMapping
-    public ResponseEntity<?> updatePet(PetDTO data){
+    public ResponseEntity<?> updatePet(@RequestBody PetDTO data){
         petService.updatePetValidate(data);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }

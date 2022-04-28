@@ -1,6 +1,7 @@
 package com.szakdolgozat.petadopt.Service;
 
 import com.szakdolgozat.petadopt.DTO.IdDTO;
+import com.szakdolgozat.petadopt.DTO.PetCreateDTO;
 import com.szakdolgozat.petadopt.DTO.PetDTO;
 import com.szakdolgozat.petadopt.Exception.InvalidParameterException;
 import com.szakdolgozat.petadopt.Exception.NoRightException;
@@ -34,7 +35,7 @@ public class PetService {
     @Autowired
     private UserUtils userUtils;
 
-    public void createPetValidate(PetDTO data){
+    public void createPetValidate(PetCreateDTO data){
 
         if (breedRepository.existsBreedById(data.getBreedId())){
             if (cityRepository.existsById(data.getCityId())){
@@ -51,7 +52,7 @@ public class PetService {
                                         data.getSize(),
                                         data.getHair(),
                                         data.getMovement(),
-                                        data.getDescription(),
+                                        "",
                                         0,
                                         breedRepository.getById(data.getBreedId()),
                                         cityRepository.getById(data.getCityId())));
