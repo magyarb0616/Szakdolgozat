@@ -5,6 +5,11 @@ public class ImageDTO {
     private String path;
     private Long petID;
 
+    public ImageDTO(String path, Long petID) {
+        this.path = path;
+        this.petID = petID;
+    }
+
     public Long getId() {
         return id;
     }

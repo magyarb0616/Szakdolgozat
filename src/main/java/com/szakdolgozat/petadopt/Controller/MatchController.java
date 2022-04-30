@@ -6,6 +6,7 @@ import com.szakdolgozat.petadopt.Exception.NoRightException;
 import com.szakdolgozat.petadopt.Exception.ResourceNotFoundException;
 import com.szakdolgozat.petadopt.Model.Match;
 import com.szakdolgozat.petadopt.Model.Pet;
+import com.szakdolgozat.petadopt.Repository.ImageRepository;
 import com.szakdolgozat.petadopt.Repository.MatchRepository;
 import com.szakdolgozat.petadopt.Repository.PetRepository;
 import com.szakdolgozat.petadopt.Service.MatchService;
@@ -33,6 +34,8 @@ public class MatchController {
     private PetRepository petRepository;
     @Autowired
     private PetService petService;
+    @Autowired
+    private ImageRepository imageRepository;
 
     @GetMapping
     public List<Map<String, String>> getAdopterMatches(){
@@ -62,6 +65,12 @@ public class MatchController {
                     String cityId = pet.getCity().getId().toString();
                     String cityName = pet.getCity().getName();
                     String countryName = pet.getCity().getCountry().getName();
+                    String picturePath = "";
+                    if (imageRepository.existsImageByPetID_Id(pet.getId())){
+                        picturePath = imageRepository.getFirstByPetID_Id(pet.getId()).getPath();
+                    } else { picturePath = "" ;}
+                    String contactEmail = pet.getAdoptive().getEmail();
+                    String contactPhone = pet.getAdoptive().getPhone();
 
                     Map<String, String> map = new LinkedHashMap<>();
                     map.put("id",id);
@@ -82,6 +91,9 @@ public class MatchController {
                     map.put("cityId",cityId);
                     map.put("cityName", cityName);
                     map.put("countryName", countryName);
+                    map.put("picturePath",picturePath);
+                    map.put("contactEmail", contactEmail);
+                    map.put("contactPhone", contactPhone);
 
                     out.add(map);
                 }

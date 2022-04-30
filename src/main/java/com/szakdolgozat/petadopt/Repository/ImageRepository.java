@@ -11,6 +11,7 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
     List<Image> findAllByPetIDId(Long id);
     Boolean existsImageByPath(String path);
     Boolean existsImageByPetID_Id(Long id);
+    Image getFirstByPetID_Id(Long id);
     void deleteAllByPetID_Id(Long id);
 
 }
