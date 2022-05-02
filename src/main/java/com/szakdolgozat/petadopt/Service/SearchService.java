@@ -62,7 +62,7 @@ public List<Pet> searchPet(SearchDTO data){
         searchCriterias.add( criteriaBuilder.equal( root.get("movement"),movement ) );
     }
 
-
+    criteriaQuery.orderBy(criteriaBuilder.asc(root.get("score")));
     criteriaQuery.select( root ).where(criteriaBuilder.and(searchCriterias.toArray(new Predicate[searchCriterias.size()]) ));
     return entityManager.createQuery(criteriaQuery).getResultList();
 }

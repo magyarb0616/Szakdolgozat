@@ -33,5 +33,12 @@ INSERT INTO PET VALUES(2,4,'lorem ipsum',1,3,'Drazse',0,1,1,1,2,1);
 INSERT INTO PET VALUES(3,7,'lorem ipsum',3,2,'Cucli',0,0,2,2,3,2);
 INSERT INTO PET VALUES(4,1,'lorem ipsum',2,1,'Kampó',0,1,3,2,3,1);
 
-
+INSERT INTO IMAGE VALUES(1,'http://127.0.0.1:8081/nodelete/1.jpg',1);
+INSERT INTO IMAGE VALUES(2,'http://127.0.0.1:8081/nodelete/2.jpg',1);
+INSERT INTO IMAGE VALUES(3,'http://127.0.0.1:8081/nodelete/3.jpg',2);
+INSERT INTO IMAGE VALUES(4,'http://127.0.0.1:8081/nodelete/4.jpg',2);
+INSERT INTO IMAGE VALUES(5,'http://127.0.0.1:8081/nodelete/5.jpg',3);
+INSERT INTO IMAGE VALUES(6,'http://127.0.0.1:8081/nodelete/6.jpg',3);
+INSERT INTO IMAGE VALUES(7,'http://127.0.0.1:8081/nodelete/7.jpg',4);
+INSERT INTO IMAGE VALUES(8,'http://127.0.0.1:8081/nodelete/8.jpg',4);
 
